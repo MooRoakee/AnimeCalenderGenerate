@@ -7,7 +7,7 @@ import requests
 
 def gen_file(_anime_msg_list):
     today = datetime.datetime.today()
-    file_name = 'anime_cal_'+str(today.year) + str(today.month).zfill(2)+'.ics'
+    file_name = 'anime_cal_' + str(today.year) + str(today.month).zfill(2) + '.ics'
     with open(file_name, 'w', encoding='utf-8') as f:
         f.write('BEGIN:VCALENDAR\n')
         f.write('VERSION:2.0\n')
@@ -42,6 +42,14 @@ def gen_file(_anime_msg_list):
             f.write(f"RRULE:FREQ=WEEKLY;UNTIL={t.strftime('%Y%m%dT%H%M%S')}\n")
             f.write(f"UID:{uuid.uuid1()}\n")
 
+
+            # 提醒
+            f.write('BEGIN:VALARM\n')
+            f.write('TRIGGER:PT0M\n')
+            f.write('ACTION:DISPLAY\n')
+            f.write('DESCRIPTION:Reminder\n')
+            f.write('END:VALARM\n')
+
             f.write('END:VEVENT\n')
 
         f.write('END:VCALENDAR')
@@ -54,7 +62,7 @@ def get_anime_msg():
     print("开始爬取数据...")
 
     today = datetime.datetime.today()
-    url = 'https://acgsecrets.hk/bangumi/'+str(today.year)+str(today.month).zfill(2)+'/'
+    url = 'https://acgsecrets.hk/bangumi/' + str(today.year) + str(today.month).zfill(2) + '/'
     r = requests.get(url, proxies=proxies)
 
     print("爬取数据完成")
@@ -78,4 +86,4 @@ if __name__ == '__main__':
 
     gen_file(anime_msg_list)
 
-    input('End Running!')
+    print('End Running!')
