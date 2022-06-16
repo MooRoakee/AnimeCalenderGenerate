@@ -42,7 +42,6 @@ def gen_file(_anime_msg_list):
             f.write(f"RRULE:FREQ=WEEKLY;UNTIL={t.strftime('%Y%m%dT%H%M%S')}\n")
             f.write(f"UID:{uuid.uuid1()}\n")
 
-
             # 提醒
             f.write('BEGIN:VALARM\n')
             f.write('TRIGGER:PT0M\n')
@@ -86,4 +85,4 @@ if __name__ == '__main__':
 
     gen_file(anime_msg_list)
 
-    print('End Running!')
+    input('End Running!')

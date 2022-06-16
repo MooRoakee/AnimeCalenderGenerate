@@ -1,2 +1,7 @@
 /.idea/
 *.ics
+__pycache__/
+
+build/getAnimeICS/
+
+*.spec
